@@ -1,0 +1,21 @@
+<odoo>
+    <record id="view_scrap_quality_check_field" model="ir.ui.view">
+        <field name="name">view.scrap.quality.check.field</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="quality_check" invisible="1"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button string="Quality Check" type="object" name="custom_quality_check" 
+                           class="oe_highlight"  attrs="{'invisible':[('quality_check', '!=', False)]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_validate']" position="attributes">
+                  <attribute name="states"></attribute>
+                  <attribute name="attrs">{'invisible': ['|',('quality_check', '=', False),('state','!=','draft')]}</attribute>
+            </xpath>
+            
+        </field>
+    </record>
+</odoo>
